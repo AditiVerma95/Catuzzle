@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 87486975}
   - component: {fileID: 87486976}
   - component: {fileID: 87486977}
+  - component: {fileID: 87486978}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -301,6 +302,18 @@ MonoBehaviour:
   tilePrefab: {fileID: 7450649538004360045, guid: e61bbf63f0580ae4fa26f4e4cb3783c0, type: 3}
   gridSize: 3
   holeObject: {fileID: 0}
+--- !u!114 &87486978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87486973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4240dfe3e616040a390399f7e628e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &279923759 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3394728970971735180, guid: 6e8db9ec45fc2ad42a452fe9f1f1025e, type: 3}
