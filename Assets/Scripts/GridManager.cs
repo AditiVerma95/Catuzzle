@@ -26,7 +26,8 @@ public class GridManager : MonoBehaviour {
         float cellSize = 300f / gridSize;
         gridLayout.cellSize = new Vector2(cellSize, cellSize);
 
-        GridMaker(); // just create the grid
+        GridMaker();
+        StartShuffle(100);
     }
 
     public void GridMaker() {
@@ -37,26 +38,22 @@ public class GridManager : MonoBehaviour {
             boardArray[i] = new GameObject[gridSize];
 
             for (int j = 0; j < gridSize; j++) {
-                var tile = Instantiate(tilePrefab, boardGrid.transform);
+                GameObject tile = Instantiate(tilePrefab, boardGrid.transform);
                 boardArray[i][j] = tile;
 
-// Get TileController and set position
-                tile.GetComponent<TileController>().Initialize(new Vector2Int(i, j));
+                TileController controller = tile.GetComponent<TileController>();
+                controller.Initialize(new Vector2Int(i, j));
 
-// Setup hole
                 if (i == gridSize - 1 && j == gridSize - 1) {
-                    Image tileImage = tile.GetComponent<Image>();
-                    Color color = tileImage.color;
-                    color.a = 0f; // transparent
-                    tileImage.color = color;
+                    tile.GetComponent<Image>().color = new Color(1, 1, 1, 0);
                     tile.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     tile.name = "Hole";
                     holeObject = tile;
                     holePosition = new Vector2Int(i, j);
                 } else {
-                    tile.GetComponentInChildren<TextMeshProUGUI>().text = $"{count++}";
+                    tile.GetComponentInChildren<TextMeshProUGUI>().text = count.ToString();
+                    count++;
                 }
-
             }
         }
 
@@ -68,7 +65,7 @@ public class GridManager : MonoBehaviour {
 
         if (IsAdjacent(pos, holePosition)) {
             GameObject tileObj = boardArray[pos.x][pos.y];
-        
+
             boardArray[holePosition.x][holePosition.y] = tileObj;
             boardArray[pos.x][pos.y] = holeObject;
 
@@ -79,16 +76,15 @@ public class GridManager : MonoBehaviour {
             tileTransform.position = holeTransform.position;
             holeTransform.position = tempPos;
 
-            // Swap hole position and tile's position
             Vector2Int temp = holePosition;
             holePosition = pos;
             tile.gridPosition = temp;
 
-            // 🔁 Check all tiles after move
             UpdateTileFadeStates();
+        } else {
+            Debug.LogWarning($"⚠️ Blocked invalid move: Tile at {pos} is not adjacent to hole at {holePosition}");
         }
     }
-
 
     private bool IsAdjacent(Vector2Int a, Vector2Int b) {
         int dx = Mathf.Abs(a.x - b.x);
@@ -96,13 +92,56 @@ public class GridManager : MonoBehaviour {
         return (dx == 1 && dy == 0) || (dx == 0 && dy == 1);
     }
 
+    private bool IsWithinBounds(Vector2Int pos) {
+        return pos.x >= 0 && pos.x < gridSize && pos.y >= 0 && pos.y < gridSize;
+    }
+
+    private List<TileController> GetAdjacentTiles() {
+        List<TileController> adjacent = new List<TileController>();
+        Vector2Int[] directions = {
+            Vector2Int.up,
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right
+        };
+
+        foreach (var dir in directions) {
+            Vector2Int neighbor = holePosition + dir;
+            if (IsWithinBounds(neighbor)) {
+                GameObject tileObj = boardArray[neighbor.x][neighbor.y];
+                if (tileObj != null && tileObj != holeObject) {
+                    adjacent.Add(tileObj.GetComponent<TileController>());
+                }
+            }
+        }
+
+        return adjacent;
+    }
+
+    private IEnumerator ShuffleRoutine(int moves) {
+        for (int i = 0; i < moves; i++) {
+            yield return new WaitForSeconds(0.01f);
+            List<TileController> adjacent = GetAdjacentTiles();
+            if (adjacent.Count > 0) {
+                TileController randomTile = adjacent[Random.Range(0, adjacent.Count)];
+                TryMoveTile(randomTile);
+            }
+        }
+
+        Debug.Log("✅ Shuffling complete");
+    }
+
+    public void StartShuffle(int moveCount = 50) {
+        StartCoroutine(ShuffleRoutine(moveCount));
+    }
+
     private void UpdateTileFadeStates() {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
-                var tileObj = boardArray[i][j];
-                if (tileObj == holeObject) continue;
+                GameObject tile = boardArray[i][j];
+                if (tile == holeObject) continue;
 
-                TileController controller = tileObj.GetComponent<TileController>();
+                TileController controller = tile.GetComponent<TileController>();
                 Vector2Int currentPos = new Vector2Int(i, j);
                 bool isCorrect = currentPos == controller.originalPosition;
 
@@ -110,5 +149,4 @@ public class GridManager : MonoBehaviour {
             }
         }
     }
-
 }

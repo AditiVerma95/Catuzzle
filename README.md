@@ -1,1 +1,1 @@
-# Catuzzle
+# fifteen_puzzle
