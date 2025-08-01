@@ -13,9 +13,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject backButton;
    
 
-    [SerializeField] private GameObject menuStartPanel;
-    [SerializeField] private GameObject choosePlayStylePanel;
-    
+    [SerializeField] private GameObject menuStartPanel;    
     
     [SerializeField] private GameObject presetImageChosenPanel;
     [SerializeField] private GameObject gridStylePanel;
@@ -55,14 +53,8 @@ public class MenuManager : MonoBehaviour {
 
     public void NewGame() {
         GameInfoStaticData.isLoading = false;
-        ChangeScreen(choosePlayStylePanel);
+        ImageStyle();
         backButton.SetActive(true);
-    }
-
-    public void ContinueGame() {
-        AudioManager.Instance.buttonTapAudioSource.Play();
-        GameInfoStaticData.isLoading = true;
-        LoadScene();
     }
     
     public void ImageStyle() {
@@ -79,11 +71,6 @@ public class MenuManager : MonoBehaviour {
         GameInfoStaticData.isImageStyle = false;
         GameInfoStaticData.userImage = null;
         ChangeScreen(gridSizePanel);
-    }
-
-    public void Import() {
-        AudioManager.Instance.buttonTapAudioSource.Play();
-        ImageImporter.Instance.OnImportImageButtonClicked();
     }
 
     public void Next() {

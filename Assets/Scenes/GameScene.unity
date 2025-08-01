@@ -278,7 +278,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f6218b96b6fc50c43ba55fc26d2ff654, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f6218b96b6fc50c43ba55fc26d2ff654, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -552,6 +552,7 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 1205763769}
   bgmSlider: {fileID: 1774016573}
   sfxSlider: {fileID: 964892810}
+  bgmClips: []
 --- !u!4 &253430636
 Transform:
   m_ObjectHideFlags: 0
@@ -3362,8 +3363,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4c05a5330f837b943a25d91c3998dd4e, type: 3}
-  m_Resource: {fileID: 8300000, guid: 4c05a5330f837b943a25d91c3998dd4e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e40b1e4cbe7fda647ad7ad88639382b9, type: 3}
+  m_Resource: {fileID: 8300000, guid: e40b1e4cbe7fda647ad7ad88639382b9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5518,8 +5519,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2a9024eb2d5d02449bc44f3d2cf46c18, type: 3}
-  m_Resource: {fileID: 8300000, guid: 2a9024eb2d5d02449bc44f3d2cf46c18, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e318a26aac092d24a9cba16ca18289ee, type: 3}
+  m_Resource: {fileID: 8300000, guid: e318a26aac092d24a9cba16ca18289ee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
