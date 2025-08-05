@@ -23,7 +23,7 @@ public class ImageImporter : MonoBehaviour {
         }
     }
 
-    public void OnImportImageButtonClicked()
+    /*public void OnImportImageButtonClicked()
     {
         bool hasPermission = NativeGallery.CheckPermission(NativeGallery.PermissionType.Read, NativeGallery.MediaType.Image);
 
@@ -90,7 +90,7 @@ public class ImageImporter : MonoBehaviour {
 
     private string SaveCroppedImage(Texture2D croppedImage)
     {
-        byte[] pngData = croppedImage.EncodeToPNG();
+        //byte[] pngData = croppedImage.EncodeToPNG();
         if (pngData != null)
         {
             string filePath = Path.Combine(Application.persistentDataPath, savedImageFileName);
@@ -100,7 +100,7 @@ public class ImageImporter : MonoBehaviour {
         Debug.LogError("Failed to encode image to PNG.");
         return null;
     }
-
+*/
     public Texture2D LoadSavedImage() {
         string filePath = Path.Combine(Application.persistentDataPath, savedImageFileName);
         if (File.Exists(filePath)) {
@@ -113,14 +113,14 @@ public class ImageImporter : MonoBehaviour {
         return null;
     }
 
-    public void DeleteSavedImage() {
+    /*public void DeleteSavedImage() {
         string filePath = Path.Combine(Application.persistentDataPath, savedImageFileName);
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
             Debug.Log("Saved image deleted.");
         }
-    }
+    }*/
     
     public void SavePresetImage(int index) {
         if (presetImages == null || presetImages.Count == 0) {
@@ -134,7 +134,7 @@ public class ImageImporter : MonoBehaviour {
         }
 
         Texture2D presetImage = presetImages[index];
-        if (presetImage != null) {
+        /*if (presetImage != null) {
             string savedPath = SaveCroppedImage(presetImage);
            
             if (!string.IsNullOrEmpty(savedPath)) {
@@ -143,7 +143,7 @@ public class ImageImporter : MonoBehaviour {
             }
         } else {
             Debug.LogError("Preset image is null.");
-        }
+        }*/
     }
 
 }

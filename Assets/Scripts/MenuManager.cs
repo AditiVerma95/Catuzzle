@@ -135,11 +135,11 @@ public class MenuManager : MonoBehaviour {
         LoadScene();
     }
 
-    public void ChooseStyle() {
+    /*public void ChooseStyle() {
         AudioManager.Instance.buttonTapAudioSource.Play();
         ImageImporter.Instance.DeleteSavedImage();
         LoadScene();
-    }
+    }*/
 
     public void NextStyle() {
         AudioManager.Instance.buttonTapAudioSource.Play();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+
 using Direction = ImageCropper.Direction;
 
 namespace ImageCropperNamespace
