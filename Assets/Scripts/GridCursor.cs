@@ -8,7 +8,7 @@ public class GridCursorEvents : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void Start()
     {
         // Finds the CursorManager in the scene
-        cursorManager = FindObjectOfType<CustomCursorManager>();
+        cursorManager = FindFirstObjectByType<CustomCursorManager>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

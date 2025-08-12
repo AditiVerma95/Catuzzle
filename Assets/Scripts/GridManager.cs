@@ -45,7 +45,7 @@ public class GridManager : MonoBehaviour {
                 controller.Initialize(new Vector2Int(i, j));
 
                 if (i == gridSize - 1 && j == gridSize - 1) {
-                    tile.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                    tile.GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
                     tile.GetComponentInChildren<TextMeshProUGUI>().text = "";
                     tile.name = "Hole";
                     holeObject = tile;
